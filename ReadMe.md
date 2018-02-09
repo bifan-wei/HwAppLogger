@@ -36,7 +36,7 @@ AppLogger for android
 <br>
 ## 3.show your log:
 ```java
- LogActivity.gotoActivity(this);
+        LogActivity.gotoActivity(this);
 ```
 
 ![image](https://github.com/bifan-wei/HwAppLogger/blob/master/Cache.png)
