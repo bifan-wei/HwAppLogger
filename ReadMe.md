@@ -34,6 +34,7 @@ AppLogger for android
 ```
 <br>
 <br>
+
 ## 3.show your log:
 ```java
         LogActivity.gotoActivity(this);
