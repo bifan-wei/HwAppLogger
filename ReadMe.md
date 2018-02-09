@@ -2,23 +2,27 @@
 AppLogger for android
 # compile it:
 ```java
-allprojects {
-    repositories {
-        maven { url 'https://jitpack.io' }
-        ...
-    }
-}
-  compile 'com.github.bifan-wei:HwAppLogger:v1.0.0'
+      allprojects {
+           repositories {
+             maven { url 'https://jitpack.io' }
+                  ...
+            }
+         }
+          compile 'com.github.bifan-wei:HwAppLogger:v1.0.0'
 ...
 
+<br>
+<br>
 
 # how to use:
+
 <br>
 <br>
+
 ## 1.init Logger:
 ```java
-  MsgLogger.init("MsgLogger save file path");
-  RequestLogger.init("RequestLogger save file path");
+        MsgLogger.init("MsgLogger save file path");
+        RequestLogger.init("RequestLogger save file path");
 ```
 
 <br>
