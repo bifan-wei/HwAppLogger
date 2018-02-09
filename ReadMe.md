@@ -1,5 +1,6 @@
 # HwAppLogger
 AppLogger for android
+
 # compile it:
 ```java
       allprojects {
@@ -9,15 +10,11 @@ AppLogger for android
             }
          }
           compile 'com.github.bifan-wei:HwAppLogger:v1.0.0'
-...
-
+ ```
 <br>
 <br>
 
 # how to use:
-
-<br>
-<br>
 
 ## 1.init Logger:
 ```java
