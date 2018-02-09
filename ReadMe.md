@@ -9,7 +9,8 @@ allprojects {
     }
 }
   compile 'com.github.bifan-wei:HwAppLogger:v1.0.0'
- ...
+...
+
 
 # how to use:
 <br>
@@ -19,6 +20,7 @@ allprojects {
   MsgLogger.init("MsgLogger save file path");
   RequestLogger.init("RequestLogger save file path");
 ```
+
 <br>
 <br>
 
