@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="logger_tag_radius">10dp</dimen>
+    <dimen name="logger_tag_width">20dp</dimen>
+    <dimen name="logger_tag_height">20dp</dimen>
+</resources>

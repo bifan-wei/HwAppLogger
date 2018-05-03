@@ -16,12 +16,15 @@ import android.view.View;
 import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hw.txtreaderlib.R;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.List;
 
@@ -54,18 +57,20 @@ public class LogActivity extends AppCompatActivity {
         }
     }
 
-    private TextView mSelectorText;
     private TextView mLevelText;
+    private ImageButton mClearBt;
     private View mTagR, mTagM, mTagC;
     private View mLevelLayout;
     private EditText mInputText;
     private ListView mListView;
     private View mCahce;
+    private View Anchor;
     private TextView mRCacheText, mMCacheText;
 
 
     private void findViewIds() {
-        mSelectorText = (TextView) findViewById(R.id.av_logger_selector_text);
+        mClearBt = (ImageButton) findViewById(R.id.va_logger_clearClick);
+        Anchor = findViewById(R.id.av_logger_level_anchor);
         mLevelText = (TextView) findViewById(R.id.av_logger_level_text);
         mLevelLayout = findViewById(R.id.av_logger_level_layout);
         mTagR = findViewById(R.id.av_logger_requestLog_tag);
@@ -76,6 +81,7 @@ public class LogActivity extends AppCompatActivity {
         mCahce = findViewById(R.id.av_logger_cache);
         mRCacheText = (TextView) findViewById(R.id.logger_cache_R_text);
         mMCacheText = (TextView) findViewById(R.id.logger_cache_M_text);
+
     }
 
     private final int Page_msgLog = 0;
@@ -95,6 +101,13 @@ public class LogActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 onSearch(null);
+                if (charSequence.length() > 0) {
+                    if (mClearBt.getVisibility() != View.VISIBLE) {
+                        mClearBt.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    mClearBt.setVisibility(View.INVISIBLE);
+                }
             }
 
             @Override
@@ -115,7 +128,40 @@ public class LogActivity extends AppCompatActivity {
                 levelMenu.dismiss();
             }
         });
+        mClearBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mClearBt.getVisibility() == View.VISIBLE) {
+                    mInputText.setText("");
+                }
+            }
+        });
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (levelMenu != null && levelMenu.isShowing()) {
+            levelMenu.dismiss();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mAdapter = null;
+        levelMenu = null;
+        mLevelText = null;
+        mTagR = null;
+        mTagM = null;
+        mTagC = null;
+        mLevelLayout = null;
+        mInputText = null;
+        mListView = null;
+        mCahce = null;
+        mRCacheText = null;
+        mMCacheText = null;
     }
 
     private void loadData() {
@@ -143,8 +189,8 @@ public class LogActivity extends AppCompatActivity {
 
     private void loadCacheData() {
         mListView.setVisibility(View.GONE);
-        mRCacheText.setText(FileUtil.byteSizeToString(RequestLogger.getLoggerSize()));
-        mMCacheText.setText(FileUtil.byteSizeToString(MsgLogger.getLoggerSize()));
+        mRCacheText.setText(byteSizeToString(RequestLogger.getLoggerSize()));
+        mMCacheText.setText(byteSizeToString(MsgLogger.getLoggerSize()));
     }
 
     private void updatePageTag() {
@@ -189,11 +235,11 @@ public class LogActivity extends AppCompatActivity {
         finish();
     }
 
+
     private Boolean CheckPermission() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
-
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
@@ -204,13 +250,11 @@ public class LogActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-
         if (requestCode == MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Permit = true;
                 loadData();
             } else {
-                // Permission Denied
                 toast("Permission Denied");
             }
             return;
@@ -228,10 +272,6 @@ public class LogActivity extends AppCompatActivity {
         t.show();
     }
 
-    public void onSearchSelector(View view) {
-
-    }
-
     public void onSearch(View view) {
         if (mAdapter != null && mAdapter instanceof MsgLogAdapter) {
             String text = mInputText.getText().toString().trim();
@@ -244,10 +284,10 @@ public class LogActivity extends AppCompatActivity {
     }
 
     public void onLevelClick(View view) {
-        if (!levelMenu.isShowing()) {
-            levelMenu.showAsDropDown(mLevelLayout, -50, 0);
-        } else {
+        if (levelMenu.isShowing()) {
             levelMenu.dismiss();
+        } else {
+            levelMenu.showAsDropDown(Anchor, 0, 0);
         }
     }
 
@@ -285,4 +325,29 @@ public class LogActivity extends AppCompatActivity {
         RequestLogger.Clear();
         loadCacheData();
     }
+
+    private String byteSizeToString(long byteSize) {
+        if (byteSize <= 0) {
+            return "0B";
+        }
+        if (byteSize < 1024)
+            return byteSize + "B";
+
+        int kb = Math.round(byteSize / 1024);
+
+        if (kb >= 1024) {
+            float mb = getFloat_KeepTwoDecimalplaces(((float) kb) / 1024);
+            return mb + " MB";
+        }
+        return kb + " KB";
+    }
+
+    private float getFloat_KeepTwoDecimalplaces(float floatV) {
+        DecimalFormat df = new DecimalFormat("0.0#");
+        df.setRoundingMode(RoundingMode.HALF_UP);
+        String value = df.format(floatV);
+        float a = Float.valueOf(value);
+        return a;
+    }
+
 }

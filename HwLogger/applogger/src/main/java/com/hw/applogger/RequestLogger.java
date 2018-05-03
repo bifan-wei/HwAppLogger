@@ -24,8 +24,8 @@ public class RequestLogger {
 
     public static void init(){
         isLog = true;
-        if (isLog && !FileUtil.isFileExist(SaveFilePath)) {
-            FileUtil.createFile(SaveFilePath);
+        if (isLog && !new File(SaveFilePath).exists()) {
+            new File(SaveFilePath).canRead();
         }
     }
 
@@ -48,7 +48,7 @@ public class RequestLogger {
             checkFileSize();
             Encode(requestLogBean);
             String xmlData = XmlUtil.pullXMLCreate(requestLogBean, StartTag);
-            FileUtil.writeToFile(xmlData, SaveFilePath, true);
+            LoggerUtil.writeToFile(xmlData, SaveFilePath, true);
         }
     }
 
@@ -66,7 +66,7 @@ public class RequestLogger {
     public static void log(String tag,Boolean isSuccess,String url, String params, String response) {
         RequestLogBean requestLogBean = new RequestLogBean();
         requestLogBean.IsSuccess = isSuccess;
-        requestLogBean.Time = TimeUtil.getCurrentDateString();
+        requestLogBean.Time = LoggerUtil.getCurrentDateString();
         requestLogBean.Url = url;
         requestLogBean.Params = params;
         requestLogBean.Tag = tag;
@@ -76,7 +76,7 @@ public class RequestLogger {
 
     public static void Clear() {
         if (isLog) {
-            FileUtil.writeToFile("", SaveFilePath, false);
+            LoggerUtil.writeToFile("", SaveFilePath, false);
         }
     }
 
@@ -86,7 +86,7 @@ public class RequestLogger {
      */
     public static List<RequestLogBean> getLogs() {
         if (isLog) {
-            String exceptionStr = FileUtil.readFromFile(SaveFilePath);
+            String exceptionStr = LoggerUtil.readFromFile(SaveFilePath);
             List<RequestLogBean> exceptions = XmlUtil.getObjectsFromXmlObjects(exceptionStr, RequestLogBean.class,
                     StartTag);
             Decode(exceptions);

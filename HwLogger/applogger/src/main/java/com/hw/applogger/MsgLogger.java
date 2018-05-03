@@ -28,8 +28,8 @@ public class MsgLogger {
 
     public static void init() {
         isLog = true;
-        if (isLog && !FileUtil.isFileExist(SaveFilePath)) {
-            FileUtil.createFile(SaveFilePath);
+        if (isLog && !new File(SaveFilePath).exists()) {
+            new File(SaveFilePath).canRead();
         }
     }
 
@@ -55,7 +55,7 @@ public class MsgLogger {
             checkFileSize();
             msgBean.Message = LoggerEncrypt.encode(msgBean.Message + "");
             String xmlData = XmlUtil.pullXMLCreate(msgBean, StartTag);
-            FileUtil.writeToFile(xmlData, SaveFilePath, true);
+            LoggerUtil.writeToFile(xmlData, SaveFilePath, true);
         }
     }
 
@@ -67,7 +67,7 @@ public class MsgLogger {
         msgBean.Level = level;
         tag = tag == null ? "" : tag;
         msgBean.Tag = tag;
-        msgBean.Time = TimeUtil.getCurrentDateString();
+        msgBean.Time = LoggerUtil.getCurrentDateString();
         log(msgBean);
 
     }
@@ -114,7 +114,7 @@ public class MsgLogger {
 
     public static void Clear() {
         if (isLog) {
-            FileUtil.writeToFile("", SaveFilePath, false);
+            LoggerUtil.writeToFile("", SaveFilePath, false);
         }
     }
 
@@ -125,7 +125,7 @@ public class MsgLogger {
      */
     public static List<MsgBean> getLogs() {
         if (isLog) {
-            String exceptionStr = FileUtil.readFromFile(SaveFilePath);
+            String exceptionStr = LoggerUtil.readFromFile(SaveFilePath);
             List<MsgBean> exceptions = XmlUtil.getObjectsFromXmlObjects(exceptionStr, MsgBean.class, StartTag);
             Decode(exceptions);
             return exceptions;

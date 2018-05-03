@@ -23,6 +23,11 @@ public class MainActivity extends AppCompatActivity {
         MsgLogger.i(className,"i","testaa业交流版  556   777  ffgfg 面");
         MsgLogger.e(className,"e","testaa");
         MsgLogger.d(className,"d(","testaa");
+        className = "AppCompatActivity";
+        MsgLogger.i(className,"i","testaa业交流版  556   777  ffgfg 面");
+        MsgLogger.e(className,"e","testaa");
+        MsgLogger.d(className,"d(","testaa");
+
 
         RequestLogger.log(className,true,"http://blog.csdn.net/yangshangwei/article/details/51271725","get post ","之前为了优化gradle的编译速度，选择了Offline Work模式，取消即可");
 

@@ -6,6 +6,11 @@
     android:background="#ffffff"
     android:orientation="vertical">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="#ededed" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="80dp">
@@ -32,22 +37,22 @@
             android:textSize="16sp" />
 
         <ImageView
-            android:onClick="onClearMsgCache"
             android:layout_width="20dp"
-            android:layout_height="25dp"
+            android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
-            android:background="@drawable/ic_logger_delect" />
+            android:background="@drawable/ic_logger_delect"
+            android:onClick="onClearMsgCache" />
 
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="1px"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="#55666666" />
+        android:background="#44666666" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -76,26 +81,25 @@
 
         <ImageView
             android:layout_width="20dp"
-            android:layout_height="25dp"
-            android:onClick="onClearRequestCache"
+            android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
-            android:background="@drawable/ic_logger_delect" />
+            android:background="@drawable/ic_logger_delect"
+            android:onClick="onClearRequestCache" />
 
     </RelativeLayout>
 
     <Button
-
-        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
-        android:text="delete all"
-        android:onClick="onClearAll"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:background="#882183fb"
+        android:onClick="onClearAll"
+        android:text="清空全部"
         android:textColor="#ffffff"
-        android:textSize="17sp"
-        android:background="#2183fb"
-        android:layout_height="wrap_content" />
+        android:textSize="15sp" />
 
 </LinearLayout>

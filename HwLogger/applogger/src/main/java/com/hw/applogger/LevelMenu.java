@@ -22,30 +22,31 @@ public class LevelMenu extends PopupWindow {
     }
 
     public void initRootView() {
-
-
         mRootView = LinearLayout.inflate(mContext, R.layout.view_level_menu, null);
-
         this.setContentView(mRootView);
-        //设置固定大小状态
-       // this.setWidth();
-       // this.setHeight(rootHeight);
-
         //设置包裹状态
         this.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
         this.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        this.setFocusable(false);
+        this.setFocusable(true);
         this.setOutsideTouchable(true);
-        //  this.setAnimationStyle(R.style.popmenu_animation);
-          this.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2183fb")));
-
-        RegisterListener();
-
-
+        this.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2183fb")));
+        registerListener();
     }
 
-    private void RegisterListener() {
+    private int viewWidth = 0;
+
+    public int getWidth() {
+        if (viewWidth == 0 && mRootView != null) {
+            int width = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+            int height = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+            mRootView.measure(width, height);
+            viewWidth = mRootView.getMeasuredWidth();
+        }
+        return viewWidth;
+    }
+
+
+    private void registerListener() {
         View all = mRootView.findViewById(R.id.logger_menu_all);
         View info = mRootView.findViewById(R.id.logger_menu_info);
         View debug = mRootView.findViewById(R.id.logger_menu_debug);

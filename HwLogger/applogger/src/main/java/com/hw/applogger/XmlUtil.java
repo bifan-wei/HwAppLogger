@@ -114,18 +114,6 @@ public class XmlUtil {
                 // 获得当前属性的类型和值
                 // 类型的话如果是基本类型，会自动装箱
                 tagValue = f.get(obj);
-                if (tagValue instanceof String) {
-                    tagValue = (String) tagValue;
-
-                } else if (tagValue instanceof Integer) {
-                    tagValue = (Integer) tagValue;
-                } else if (tagValue instanceof Float) {
-                    tagValue = (Float) tagValue;
-                } else if (tagValue instanceof Long) {
-                    tagValue = (Long) tagValue;
-                } else if (tagValue instanceof Boolean) {
-                    tagValue = (Boolean) tagValue;
-                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

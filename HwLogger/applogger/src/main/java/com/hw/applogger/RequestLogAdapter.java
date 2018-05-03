@@ -68,7 +68,7 @@ public class RequestLogAdapter extends BaseAdapter {
         }
 
         RequestLogBean bean = data.get(i);
-        holder.time.setText(TimeUtil.getTimeByString(bean.Time, "yyyyMMdd HH:mm:ss", "yy/MM/dd HH:mm:ss"));
+        holder.time.setText(LoggerUtil.getTimeByString(bean.Time, "yyyyMMdd HH:mm:ss", "yy/MM/dd HH:mm:ss"));
         holder.isSuccess.setText(bean.IsSuccess ? "success" : "false");
         holder.tag.setText(bean.Tag + "");
         holder.url.setText(bean.Url + "");

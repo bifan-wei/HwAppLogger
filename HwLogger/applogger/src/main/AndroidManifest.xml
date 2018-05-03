@@ -10,6 +10,7 @@
         android:supportsRtl="true">
         <activity
             android:name="com.hw.applogger.LogActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:theme="@style/TranslucentTheme"></activity>
     </application>
 

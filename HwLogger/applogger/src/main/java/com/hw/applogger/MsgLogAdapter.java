@@ -69,7 +69,7 @@ public class MsgLogAdapter extends BaseAdapter implements Filterable {
         }
 
         MsgBean bean = data.get(i);
-        holder.time.setText(TimeUtil.getTimeByString(bean.Time, "yyyyMMdd HH:mm:ss", "yy/MM/dd HH:mm:ss"));
+        holder.time.setText(LoggerUtil.getTimeByString(bean.Time, "yyyyMMdd HH:mm:ss", "yy/MM/dd HH:mm:ss"));
         holder.tag.setText(bean.Tag + "");
         holder.className.setText(bean.ClassName + "");
         holder.level.setText(bean.Level + "");
@@ -105,46 +105,47 @@ public class MsgLogAdapter extends BaseAdapter implements Filterable {
             List<MsgBean> results = new ArrayList<>();
             FilterResults filterResults = new FilterResults();
             for (MsgBean bean : data) {
-                MsgBean c = checkLevel(bean, charSequence);
+                MsgBean c = checkTag(bean, charSequence);
                 if (c != null) {
                     results.add(c);
-                }
-
-                MsgBean t = checkTag(bean, charSequence);
-                if (t != null) {
-                    results.add(t);
-                }
-
-                MsgBean n = checkClassName(bean, charSequence);
-                if (n != null) {
-                    results.add(n);
+                } else {
+                    MsgBean t = checkClassName(bean, charSequence);
+                    if (t != null) {
+                        results.add(t);
+                    } else {
+                        MsgBean n = checkLevel(bean, charSequence);
+                        if (n != null) {
+                            results.add(n);
+                        }
+                    }
                 }
             }
-
             filterResults.values = results;
             return filterResults;
         }
 
         private MsgBean checkClassName(MsgBean bean, CharSequence charSequence) {
-            String s = charSequence.toString();
-            if ((bean.ClassName + "").contains(s)) {
+            String s = charSequence.toString().toLowerCase();
+            if ((bean.ClassName + "").toLowerCase().contains(s)) {
                 return bean;
             }
             return null;
         }
 
         private MsgBean checkTag(MsgBean bean, CharSequence charSequence) {
-            String s = charSequence.toString();
-            if ((bean.Tag + "").contains(s)) {
+            String s = charSequence.toString().toLowerCase();
+            if ((bean.Tag + "").toLowerCase().contains(s)) {
                 return bean;
             }
             return null;
         }
 
         private MsgBean checkLevel(MsgBean bean, CharSequence charSequence) {
-            String s = charSequence.toString();
-            if (s.equals(LogLevel.Info) || s.equals(LogLevel.Debug) || s.equals(LogLevel.Error)) {
-                if ((bean.Level + "").equals(s)) {
+            String s = charSequence.toString().toLowerCase();
+            if (       s.equals(LogLevel.Info.toLowerCase())
+                    || s.equals(LogLevel.Debug.toLowerCase())
+                    || s.equals(LogLevel.Error.toLowerCase())) {
+                if(bean.Level.toLowerCase().equals(s)) {
                     return bean;
                 }
             }
@@ -155,7 +156,6 @@ public class MsgLogAdapter extends BaseAdapter implements Filterable {
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
             data = (List<MsgBean>) filterResults.values;
             notifyDataSetChanged();
-
         }
     }
 
