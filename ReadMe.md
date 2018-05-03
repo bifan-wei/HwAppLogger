@@ -1,5 +1,5 @@
 # HwAppLogger
-AppLogger for android
+androidæ—¥å¿—è®°å½•ä¸æŸ¥çœ‹æ¨¡å—
 
 # compile it:
 ```java
@@ -9,7 +9,7 @@ AppLogger for android
                   ...
             }
          }
-          compile 'com.github.bifan-wei:HwAppLogger:v1.0.0'
+          compile 'com.github.bifan-wei:HwAppLogger:v1.1.0'
  ```
 <br>
 <br>
@@ -27,10 +27,10 @@ AppLogger for android
 
 ## 2.use logger:
 ```java
-        MsgLogger.i(className,"i","testaaÒµ½»Á÷°æ  556   777  ffgfg Ãæ");
+        MsgLogger.i(className,"i","testaaä¸šäº¤æµç‰ˆ  556   777  ffgfg é¢");
         MsgLogger.e(className,"e","testaa");
         MsgLogger.d(className,"d(","testaa");
-        RequestLogger.log(className,true,"http://blog.csdn.net/yangshangwei/article/details/51271725","get post ","Ö®Ç°ÎªÁËÓÅ           »¯gradleµÄ±àÒëËÙ¶È£¬Ñ¡ÔñÁËOffline WorkÄ£Ê½£¬È¡Ïû¼´¿É");
+        RequestLogger.log(className,true,"http://blog.csdn.net/yangshangwei/article/details/51271725","get post ","ä¹‹å‰ä¸ºäº†ä¼˜           åŒ–gradleçš„ç¼–è¯‘é€Ÿåº¦ï¼Œé€‰æ‹©äº†Offline Workæ¨¡å¼ï¼Œå–æ¶ˆå³å¯");
 ```
 <br>
 <br>
