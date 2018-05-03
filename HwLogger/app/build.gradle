@@ -1,14 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion Integer.valueOf(project.properties.get("compileSdkVersion"))
-    buildToolsVersion project.properties.get("buildToolsVersion")
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
     defaultConfig {
-        applicationId "com.lancoo.rsap"
-        minSdkVersion Integer.valueOf(project.properties.get("minSdkVersion"))
-        targetSdkVersion Integer.valueOf(project.properties.get("compileSdkVersion"))
-        versionCode 3
-        versionName "1.1"
+        applicationId "com.hw.logger"
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -20,7 +21,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile "com.android.support:appcompat-v7:${project.properties.get("support")}"
+    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile project(':applogger')
 }
