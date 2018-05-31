@@ -56,12 +56,12 @@ public class RequestLogAdapter extends BaseAdapter {
             view = LayoutInflater.from(context).inflate(R.layout.adapter_request_logger, null);
             holder = new Holder();
             holder.Bg =  view.findViewById(R.id.request_log_bg);
-            holder.tag = view.findViewById(R.id.request_log_tag);
-            holder.isSuccess = view.findViewById(R.id.request_log_isSuccess);
-            holder.time = view.findViewById(R.id.request_log_Time);
-            holder.url = view.findViewById(R.id.request_log_url);
-            holder.params = view.findViewById(R.id.request_log_params);
-            holder.response = view.findViewById(R.id.request_log_response);
+            holder.tag = (TextView)view.findViewById(R.id.request_log_tag);
+            holder.isSuccess = (TextView)view.findViewById(R.id.request_log_isSuccess);
+            holder.time = (TextView)view.findViewById(R.id.request_log_Time);
+            holder.url = (TextView)view.findViewById(R.id.request_log_url);
+            holder.params = (TextView)view.findViewById(R.id.request_log_params);
+            holder.response = (TextView)view.findViewById(R.id.request_log_response);
             view.setTag(holder);
         } else {
             holder = (Holder) view.getTag();

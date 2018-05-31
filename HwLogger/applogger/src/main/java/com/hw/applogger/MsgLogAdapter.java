@@ -58,11 +58,11 @@ public class MsgLogAdapter extends BaseAdapter implements Filterable {
         if (view == null) {
             view = LayoutInflater.from(context).inflate(R.layout.adapter_msg_logger, null);
             holder = new MsgLogAdapter.Holder();
-            holder.tag = view.findViewById(R.id.msg_log_tag_text);
-            holder.level = view.findViewById(R.id.msg_log_level);
-            holder.time = view.findViewById(R.id.msg_log_Time);
-            holder.className = view.findViewById(R.id.msg_log_className);
-            holder.message = view.findViewById(R.id.msg_log_msg);
+            holder.tag = (TextView) view.findViewById(R.id.msg_log_tag_text);
+            holder.level = (TextView)view.findViewById(R.id.msg_log_level);
+            holder.time = (TextView)view.findViewById(R.id.msg_log_Time);
+            holder.className = (TextView)view.findViewById(R.id.msg_log_className);
+            holder.message = (TextView)view.findViewById(R.id.msg_log_msg);
             view.setTag(holder);
         } else {
             holder = (MsgLogAdapter.Holder) view.getTag();
