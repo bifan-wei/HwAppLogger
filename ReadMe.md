@@ -40,6 +40,6 @@ android日志记录与查看模块
         LogActivity.gotoActivity(this);
 ```
 
-![image](https://github.com/bifan-wei/HwAppLogger/blob/master/Cache.png)
+![image](https://github.com/bifan-wei/HwAppLogger/blob/master/ic_msglogger.png)
 
-![image](https://github.com/bifan-wei/HwAppLogger/blob/master/MgsLog.png)
+![image](https://github.com/bifan-wei/HwAppLogger/blob/master/ic_requestlogger.png)
