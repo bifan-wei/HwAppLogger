@@ -55,13 +55,13 @@ public class RequestLogAdapter extends BaseAdapter {
         if (view == null) {
             view = LayoutInflater.from(context).inflate(R.layout.adapter_request_logger, null);
             holder = new Holder();
-            holder.Bg =  view.findViewById(R.id.request_log_bg);
-            holder.tag = (TextView)view.findViewById(R.id.request_log_tag);
-            holder.isSuccess = (TextView)view.findViewById(R.id.request_log_isSuccess);
-            holder.time = (TextView)view.findViewById(R.id.request_log_Time);
-            holder.url = (TextView)view.findViewById(R.id.request_log_url);
-            holder.params = (TextView)view.findViewById(R.id.request_log_params);
-            holder.response = (TextView)view.findViewById(R.id.request_log_response);
+            holder.Bg = view.findViewById(R.id.request_log_bg);
+            holder.tag = (TextView) view.findViewById(R.id.request_log_tag);
+            holder.isSuccess = (TextView) view.findViewById(R.id.request_log_isSuccess);
+            holder.time = (TextView) view.findViewById(R.id.request_log_Time);
+            holder.url = (TextView) view.findViewById(R.id.request_log_url);
+            holder.params = (TextView) view.findViewById(R.id.request_log_params);
+            holder.response = (TextView) view.findViewById(R.id.request_log_response);
             view.setTag(holder);
         } else {
             holder = (Holder) view.getTag();
@@ -75,11 +75,14 @@ public class RequestLogAdapter extends BaseAdapter {
         holder.params.setText(bean.Params + "");
         holder.response.setText(bean.Response);
         if (bean.IsSuccess) {
+            holder.isSuccess.setTextColor(Color.BLACK);
             holder.Bg.setBackgroundColor(Color.WHITE);
+            holder.response.setBackgroundColor(Color.parseColor("#ededed"));
         } else {
+            holder.isSuccess.setTextColor(Color.RED);
+            holder.response.setBackgroundColor(Color.parseColor("#00ffffff"));
             holder.Bg.setBackgroundColor(Color.parseColor("#fbd6d9"));
         }
-
 
         return view;
     }

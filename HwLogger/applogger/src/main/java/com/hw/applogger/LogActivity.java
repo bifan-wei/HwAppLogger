@@ -1,22 +1,14 @@
 package com.hw.applogger;
 
-import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,10 +24,8 @@ import java.util.List;
  * created by ： bifan-wei
  */
 
-public class LogActivity extends AppCompatActivity {
+public class LogActivity extends Activity {
     private String tag = "MainActivity";
-    private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 0x01;
-    private Boolean Permit = false;
 
     public static void gotoActivity(Context context) {
         Intent intent = new Intent();
@@ -46,39 +36,28 @@ public class LogActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setStatusBarColor();
         setContentView(R.layout.av_hw_applogger);
         findViewIds();
         registerListener();
-        if (CheckPermission()) {
-            Permit = true;
-            loadData();
-        }
+        loadData();
+
     }
 
     private TextView mLevelText;
-    private ImageButton mClearBt;
-    private View mTagR, mTagM, mTagC;
+    private View mTagR, mTagM;
     private View mLevelLayout;
-    private EditText mInputText;
     private ListView mListView;
-    private View mCahce;
-    private View Anchor;
     private TextView mRCacheText, mMCacheText;
 
 
     private void findViewIds() {
-        mClearBt = (ImageButton) findViewById(R.id.va_logger_clearClick);
-        Anchor = findViewById(R.id.av_logger_level_anchor);
         mLevelText = (TextView) findViewById(R.id.av_logger_level_text);
         mLevelLayout = findViewById(R.id.av_logger_level_layout);
-        mTagR = findViewById(R.id.av_logger_requestLog_tag);
-        mTagM = findViewById(R.id.av_logger_msgLog_tag);
-        mTagC = findViewById(R.id.av_logger_cache_tag);
-        mInputText = (EditText) findViewById(R.id.av_logger_input_text);
+        mTagR = findViewById(R.id.av_page_switcher2);
+        mTagM = findViewById(R.id.av_page_switcher1);
         mListView = (ListView) findViewById(R.id.av_logger_list);
-        mCahce = findViewById(R.id.av_logger_cache);
         mRCacheText = (TextView) findViewById(R.id.logger_cache_R_text);
         mMCacheText = (TextView) findViewById(R.id.logger_cache_M_text);
 
@@ -92,47 +71,14 @@ public class LogActivity extends AppCompatActivity {
     private LevelMenu levelMenu;
 
     private void registerListener() {
-        mInputText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                onSearch(null);
-                if (charSequence.length() > 0) {
-                    if (mClearBt.getVisibility() != View.VISIBLE) {
-                        mClearBt.setVisibility(View.VISIBLE);
-                    }
-                } else {
-                    mClearBt.setVisibility(View.INVISIBLE);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
         levelMenu = new LevelMenu(this);
         levelMenu.setLevelClickListener(new LevelMenu.onLevelClickListener() {
             @Override
             public void onLevel(String level) {
                 mLevelText.setText(level);
-                if (!level.equals("All")) {
-                    mInputText.setText(level);
-                } else {
-                    mInputText.setText("");
-                }
                 levelMenu.dismiss();
-            }
-        });
-        mClearBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mClearBt.getVisibility() == View.VISIBLE) {
-                    mInputText.setText("");
+                if (mAdapter != null) {
+                    ((MsgLogAdapter) mAdapter).getFilter().filter(level);
                 }
             }
         });
@@ -155,11 +101,8 @@ public class LogActivity extends AppCompatActivity {
         mLevelText = null;
         mTagR = null;
         mTagM = null;
-        mTagC = null;
         mLevelLayout = null;
-        mInputText = null;
         mListView = null;
-        mCahce = null;
         mRCacheText = null;
         mMCacheText = null;
     }
@@ -195,19 +138,16 @@ public class LogActivity extends AppCompatActivity {
 
     private void updatePageTag() {
         if (CurrentPage == Page_msgLog) {
-            mTagM.setVisibility(View.VISIBLE);
-            mTagR.setVisibility(View.GONE);
-            mTagC.setVisibility(View.GONE);
+            mTagM.setBackgroundResource(R.drawable.shape_item_selected);
+            mTagR.setBackgroundResource(R.drawable.shape_item_unselected);
             mLevelLayout.setVisibility(View.VISIBLE);
         } else if (CurrentPage == Page_requestLog) {
-            mTagM.setVisibility(View.GONE);
-            mTagR.setVisibility(View.VISIBLE);
-            mTagC.setVisibility(View.GONE);
+            mTagM.setBackgroundResource(R.drawable.shape_item_unselected);
+            mTagR.setBackgroundResource(R.drawable.shape_item_selected);
             mLevelLayout.setVisibility(View.GONE);
         } else {
-            mTagM.setVisibility(View.GONE);
-            mTagR.setVisibility(View.GONE);
-            mTagC.setVisibility(View.VISIBLE);
+            mTagM.setBackgroundResource(R.drawable.shape_item_unselected);
+            mTagR.setBackgroundResource(R.drawable.shape_item_unselected);
             mLevelLayout.setVisibility(View.GONE);
         }
     }
@@ -235,33 +175,6 @@ public class LogActivity extends AppCompatActivity {
         finish();
     }
 
-
-    private Boolean CheckPermission() {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Permit = true;
-                loadData();
-            } else {
-                toast("Permission Denied");
-            }
-            return;
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
     private Toast t;
 
     private void toast(String msg) {
@@ -272,22 +185,12 @@ public class LogActivity extends AppCompatActivity {
         t.show();
     }
 
-    public void onSearch(View view) {
-        if (mAdapter != null && mAdapter instanceof MsgLogAdapter) {
-            String text = mInputText.getText().toString().trim();
-            if (!text.isEmpty()) {
-                ((MsgLogAdapter) mAdapter).getFilter().filter(text);
-            } else {
-                loadMsgLogData();
-            }
-        }
-    }
 
     public void onLevelClick(View view) {
         if (levelMenu.isShowing()) {
             levelMenu.dismiss();
         } else {
-            levelMenu.showAsDropDown(Anchor, 0, 0);
+            levelMenu.showAsDropDown(mLevelLayout, 0, 2);
         }
     }
 

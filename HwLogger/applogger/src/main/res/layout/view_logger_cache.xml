@@ -96,7 +96,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="30dp"
-        android:background="#882183fb"
+        android:background="#2183fb"
         android:onClick="onClearAll"
         android:text="清空全部"
         android:textColor="#ffffff"

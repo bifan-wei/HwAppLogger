@@ -75,12 +75,8 @@ public class XmlUtil {
      * 2017年1月16日下午4:22:22
      */
     public static String pullXMLCreate(Object xmlData, String startTag) {
-
-        if (xmlData == null)
-            throw new NullPointerException("xmlData can not be null");
-
+        if (xmlData == null) throw new NullPointerException("xmlData can not be null");
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();//用这个可以设置编码
-
         try {
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             XmlSerializer xmlSerializer = factory.newSerializer();
@@ -89,7 +85,6 @@ public class XmlUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         try {
             return outputStream.toString("utf-8");
         } catch (UnsupportedEncodingException e) {
@@ -99,14 +94,10 @@ public class XmlUtil {
         return "";
     }
 
-    private static void pullXMLCreateFromObject(XmlSerializer xmlSerializer, Object xmlData, String startTag)
-            throws IllegalArgumentException, IllegalStateException, IOException {
+    private static void pullXMLCreateFromObject(XmlSerializer xmlSerializer, Object xmlData, String startTag) throws IllegalArgumentException, IllegalStateException, IOException {
         Object obj = xmlData;
-
         List<Field> fields = getPublicFields(obj.getClass());
-
         xmlSerializer.startTag("", startTag); // 创建单个结构体开始节点
-
         for (Field f : fields) {
             String tagName = f.getName();
             Object tagValue = "";
@@ -330,7 +321,6 @@ public class XmlUtil {
         } catch (XmlPullParserException e1) {
             e1.printStackTrace();
         } catch (IOException e) {
-
             e.printStackTrace();
         }
 

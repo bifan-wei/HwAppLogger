@@ -5,6 +5,7 @@ package com.hw.applogger;
  */
 
 public class LogLevel {
+    public static final String ALL = "All";
     public static final String Debug = "Debug";
     public static final String Info = "Info";
     public static final String Error = "Error";

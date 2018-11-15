@@ -2,25 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#2183fb"
-    android:orientation="vertical">
+    android:background="@drawable/shape_logger_menu_bg"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
 
     <TextView
         android:id="@+id/logger_menu_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:layout_gravity="center_horizontal"
         android:layout_margin="5dp"
         android:text="all"
         android:textColor="#ffffff" />
 
     <View
-        android:layout_gravity="center_horizontal"
+
         android:layout_width="50dp"
         android:layout_height="1dp"
-        android:background="#33ffffff" />
+        android:layout_gravity="center_horizontal"
+        android:background="#33ffffff"
+        android:visibility="invisible" />
 
     <TextView
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         android:id="@+id/logger_menu_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,10 +38,11 @@
         android:textColor="#ffffff" />
 
     <View
-        android:layout_gravity="center_horizontal"
         android:layout_width="50dp"
         android:layout_height="1dp"
-        android:background="#33ffffff" />
+        android:layout_gravity="center_horizontal"
+        android:background="#33ffffff"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/logger_menu_debug"
@@ -42,15 +51,20 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="5dp"
         android:text="debug"
+        android:paddingLeft="7dp"
+        android:paddingRight="7dp"
         android:textColor="#ffffff" />
 
     <View
-        android:layout_gravity="center_horizontal"
         android:layout_width="50dp"
         android:layout_height="1dp"
-        android:background="#33ffffff" />
+        android:layout_gravity="center_horizontal"
+        android:background="#33ffffff"
+        android:visibility="invisible" />
 
     <TextView
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         android:id="@+id/logger_menu_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

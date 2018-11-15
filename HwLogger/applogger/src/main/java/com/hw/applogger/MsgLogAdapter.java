@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.hw.txtreaderlib.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -59,10 +60,10 @@ public class MsgLogAdapter extends BaseAdapter implements Filterable {
             view = LayoutInflater.from(context).inflate(R.layout.adapter_msg_logger, null);
             holder = new MsgLogAdapter.Holder();
             holder.tag = (TextView) view.findViewById(R.id.msg_log_tag_text);
-            holder.level = (TextView)view.findViewById(R.id.msg_log_level);
-            holder.time = (TextView)view.findViewById(R.id.msg_log_Time);
-            holder.className = (TextView)view.findViewById(R.id.msg_log_className);
-            holder.message = (TextView)view.findViewById(R.id.msg_log_msg);
+            holder.level = (TextView) view.findViewById(R.id.msg_log_level);
+            holder.time = (TextView) view.findViewById(R.id.msg_log_Time);
+            holder.className = (TextView) view.findViewById(R.id.msg_log_className);
+            holder.message = (TextView) view.findViewById(R.id.msg_log_msg);
             view.setTag(holder);
         } else {
             holder = (MsgLogAdapter.Holder) view.getTag();
@@ -70,10 +71,10 @@ public class MsgLogAdapter extends BaseAdapter implements Filterable {
 
         MsgBean bean = data.get(i);
         holder.time.setText(LoggerUtil.getTimeByString(bean.Time, "yyyyMMdd HH:mm:ss", "yy/MM/dd HH:mm:ss"));
-        holder.tag.setText(bean.Tag + "");
-        holder.className.setText(bean.ClassName + "");
-        holder.level.setText(bean.Level + "");
-        holder.message.setText(bean.Message + "");
+        holder.tag.setText(bean.Tag );
+        holder.className.setText(bean.ClassName);
+        holder.level.setText(bean.Level);
+        holder.message.setText(bean.Message);
         if (bean.Level.equals(LogLevel.Info)) {
             holder.level.setTextColor(Color.parseColor("#03d251"));
         } else if (bean.Level.equals(LogLevel.Debug)) {
@@ -120,6 +121,7 @@ public class MsgLogAdapter extends BaseAdapter implements Filterable {
                     }
                 }
             }
+            Collections.reverse(results);
             filterResults.values = results;
             return filterResults;
         }
@@ -142,12 +144,15 @@ public class MsgLogAdapter extends BaseAdapter implements Filterable {
 
         private MsgBean checkLevel(MsgBean bean, CharSequence charSequence) {
             String s = charSequence.toString().toLowerCase();
-            if (       s.equals(LogLevel.Info.toLowerCase())
+            if (s.equals(LogLevel.Info.toLowerCase())
                     || s.equals(LogLevel.Debug.toLowerCase())
                     || s.equals(LogLevel.Error.toLowerCase())) {
-                if(bean.Level.toLowerCase().equals(s)) {
+                if (bean.Level.toLowerCase().equals(s)) {
                     return bean;
                 }
+            }
+            if (s.equals(LogLevel.ALL.toLowerCase())) {
+                return bean;
             }
             return null;
         }

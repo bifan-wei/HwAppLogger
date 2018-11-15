@@ -8,7 +8,7 @@ import java.util.List;
 
 public class RequestLogger {
     public static final String tag = "RequestLogger";
-    public static String SaveFilePath = Environment.getExternalStorageDirectory() + "/hw526b15";
+    public static String SaveFilePath = Environment.getExternalStorageDirectory() + "/hw526b15req";
     public static final String StartTag = "request";
     public static final int FileMaxSize = 100 * 1024 * 1;//限制不超过100KB
     private static Boolean isLog = false;//是否运行记录
@@ -22,6 +22,11 @@ public class RequestLogger {
         init();
     }
 
+    public static void init(String saveFilePath, int FileMaxSize) {
+        MsgLogger.FileMaxSize = FileMaxSize;
+        init(saveFilePath);
+    }
+
     public static void init(){
         isLog = true;
         if (isLog && !new File(SaveFilePath).exists()) {
@@ -29,11 +34,7 @@ public class RequestLogger {
         }
     }
 
-    /**
-     * @return 返回的是字节数
-     * --------------------
-     * 获取异常日志文件大小
-     */
+
     public static long getLoggerSize() {
         if (isLog) {
             File file = new File(SaveFilePath);
@@ -51,7 +52,6 @@ public class RequestLogger {
             LoggerUtil.writeToFile(xmlData, SaveFilePath, true);
         }
     }
-
 
 
     /**

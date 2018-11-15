@@ -10,56 +10,53 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="60dp"
         android:background="#328cfb">
 
-        <ImageView
-            android:id="@+id/av_logger_back"
-            android:layout_width="23dp"
-            android:layout_height="18dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/ic_logger_key_back"
-            android:onClick="onBack" />
-
-
-        <EditText
-            android:id="@+id/av_logger_input_text"
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="15dp"
-            android:layout_toRightOf="@+id/av_logger_back"
-            android:hint="search class or tag"
-            android:textColor="#ffffff"
-            android:textColorHint="#44ffffff"
-            android:textSize="16sp"
-            android:theme="@style/LoggerEditText" />
+            android:clickable="true"
+            android:onClick="onBack"
+            android:padding="10dp">
 
-        <ImageButton
-            android:id="@+id/va_logger_clearClick"
-            android:layout_width="20dp"
-            android:visibility="invisible"
-            android:layout_height="20dp"
+            <ImageView
+                android:id="@+id/av_logger_back"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_marginLeft="7dp"
+                android:background="@drawable/ic_logger_key_back" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/ic_logger_circle_delete"
-            android:onClick="onSearch"
-            android:padding="5dp"
-            android:text="清空"
-            android:textColor="#ffffff"
-            android:textSize="15sp" />
+            android:clickable="true"
+            android:onClick="onCacheClick"
+            android:padding="10dp">
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/ic_cache_clear" />
+        </RelativeLayout>
+
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
+        android:background="#328cfb"
         android:onClick="onMsgLogClick"
-        android:paddingLeft="15dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="17dp"
         android:paddingRight="15dp"
         android:paddingTop="10dp">
 
@@ -67,26 +64,25 @@
             android:id="@+id/av_page_switcher1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/shape_item_selected"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="MsgLog"
-                android:textColor="#000000"
+                android:paddingBottom="3dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="3dp"
+                android:text="msglog"
+                android:textColor="#ffffff"
                 android:textSize="14sp" />
 
-            <View
-                android:id="@+id/av_logger_msgLog_tag"
-                android:layout_width="50dp"
-                android:layout_height="2dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
-                android:background="#328cfb" />
         </LinearLayout>
 
         <LinearLayout
+            android:background="@drawable/shape_item_unselected"
             android:id="@+id/av_page_switcher2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -99,60 +95,35 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="RequestLog"
-                android:textColor="#000000"
+                android:text="requestlog"
+                android:paddingBottom="3dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="3dp"
+                android:textColor="#ffffff"
                 android:textSize="14sp" />
 
-            <View
-                android:id="@+id/av_logger_requestLog_tag"
-                android:layout_width="50dp"
-                android:layout_height="2dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
-                android:background="#328cfb"
-                android:visibility="invisible" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/av_page_switcher3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_toRightOf="@+id/av_page_switcher2"
-            android:onClick="onCacheClick"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="  Cache  "
-                android:textColor="#000000"
-                android:textSize="14sp" />
-
-            <View
-                android:id="@+id/av_logger_cache_tag"
-                android:layout_width="50dp"
-                android:layout_height="2dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
-                android:background="#328cfb"
-                android:visibility="invisible" />
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/av_logger_level_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:paddingBottom="2dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="2dp"
+            android:background="@drawable/shape_item_unselected"
             android:onClick="onLevelClick"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
+                android:layout_width="11dp"
+                android:layout_height="11dp"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/ic_down_black" />
+                android:background="@drawable/ic_down_white" />
 
             <TextView
                 android:id="@+id/av_logger_level_text"
@@ -161,26 +132,15 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="5dp"
                 android:text="All"
-                android:textColor="#000000"
+                android:textColor="#ffffff"
                 android:textSize="14sp" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/av_logger_level_anchor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_margin="3dp"
-            android:text="debug"
-            android:visibility="invisible" />
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#edededed" />
 
     <LinearLayout
+        android:layout_marginTop="0dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#e5e5e5"
@@ -192,7 +152,7 @@
             android:layout_height="match_parent"
             android:layout_margin="4dp"
             android:divider="#e4e5e5"
-            android:dividerHeight="5dp">
+            android:dividerHeight="1dp">
 
         </ListView>
 

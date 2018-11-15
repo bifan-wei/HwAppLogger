@@ -1,7 +1,6 @@
 package com.hw.applogger;
 
 import android.os.Environment;
-import android.support.annotation.NonNull;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -12,10 +11,11 @@ import java.util.List;
  * bifan-wei
  */
 public class MsgLogger {
-    public static String SaveFilePath = Environment.getExternalStorageDirectory() + "/hw526b14";
+    public static String SaveFilePath = Environment.getExternalStorageDirectory() + "/hw526b14msg";
     public static final String StartTag = "exception";
-    public static final int FileMaxSize = 100 * 1024 * 1; //限制不超过100K
-    private static Boolean isLog = false;//是否运行记录
+    public static int FileMaxSize = 100 * 1024 * 1; //限制不超过100K
+    public static Boolean isLog = false;//是否运行记录
+
 
     /**
      * @param saveFilePath 只要进行初始化就会默认开启该功能
@@ -25,6 +25,12 @@ public class MsgLogger {
         isLog = true;
         init();
     }
+
+    public static void init(String saveFilePath, int FileMaxSize) {
+        MsgLogger.FileMaxSize = FileMaxSize;
+        init(saveFilePath);
+    }
+
 
     public static void init() {
         isLog = true;
@@ -60,7 +66,7 @@ public class MsgLogger {
     }
 
 
-    public static void log(@NonNull String className, String tag, String exceptionMsg, String level) {
+    public static void log(String className, String tag, String exceptionMsg, String level) {
         MsgBean msgBean = new MsgBean();
         msgBean.ClassName = className;
         msgBean.Message = exceptionMsg;
@@ -72,32 +78,32 @@ public class MsgLogger {
 
     }
 
-    public static void d(@NonNull String className, String tag, String exceptionMsg) {
+    public static void d(String className, String tag, String exceptionMsg) {
         log(className, tag, exceptionMsg, LogLevel.Debug);
 
     }
 
-    public static void i(@NonNull String className, String tag, String exceptionMsg) {
+    public static void i(String className, String tag, String exceptionMsg) {
         log(className, tag, exceptionMsg, LogLevel.Info);
 
     }
 
-    public static void e(@NonNull String className, String tag, String exceptionMsg) {
+    public static void e(String className, String tag, String exceptionMsg) {
         log(className, tag, exceptionMsg, LogLevel.Error);
 
     }
 
-    public static void d(@NonNull String className, String exceptionMsg) {
+    public static void d(String className, String exceptionMsg) {
         log(className, null, exceptionMsg, LogLevel.Debug);
 
     }
 
-    public static void i(@NonNull String className, String exceptionMsg) {
+    public static void i(String className, String exceptionMsg) {
         log(className, null, exceptionMsg, LogLevel.Info);
 
     }
 
-    public static void e(@NonNull String className, String exceptionMsg) {
+    public static void e(String className, String exceptionMsg) {
         log(className, null, exceptionMsg, LogLevel.Error);
 
     }
@@ -118,11 +124,7 @@ public class MsgLogger {
         }
     }
 
-    /**
-     * @return 不会返回null
-     * --------------------
-     * 获取异常记录信息数据
-     */
+
     public static List<MsgBean> getLogs() {
         if (isLog) {
             String exceptionStr = LoggerUtil.readFromFile(SaveFilePath);

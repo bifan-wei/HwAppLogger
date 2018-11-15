@@ -15,13 +15,13 @@ public class LevelMenu extends PopupWindow {
     private View mRootView;
     private Context mContext;
 
-    public LevelMenu(Context context) {
+    LevelMenu(Context context) {
         super(context);
         mContext = context;
         initRootView();
     }
 
-    public void initRootView() {
+    private void initRootView() {
         mRootView = LinearLayout.inflate(mContext, R.layout.view_level_menu, null);
         this.setContentView(mRootView);
         //设置包裹状态
@@ -51,7 +51,7 @@ public class LevelMenu extends PopupWindow {
         View info = mRootView.findViewById(R.id.logger_menu_info);
         View debug = mRootView.findViewById(R.id.logger_menu_debug);
         View error = mRootView.findViewById(R.id.logger_menu_error);
-        all.setOnClickListener(new LevelClick("All"));
+        all.setOnClickListener(new LevelClick(LogLevel.ALL));
         info.setOnClickListener(new LevelClick(LogLevel.Info));
         debug.setOnClickListener(new LevelClick(LogLevel.Debug));
         error.setOnClickListener(new LevelClick(LogLevel.Error));
@@ -60,7 +60,7 @@ public class LevelMenu extends PopupWindow {
     private class LevelClick implements View.OnClickListener {
         String Level;
 
-        public LevelClick(String level) {
+        LevelClick(String level) {
             Level = level;
         }
 

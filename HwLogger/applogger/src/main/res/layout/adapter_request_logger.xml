@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     android:id="@+id/request_log_bg"
-    android:background="#ffffff"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp">
+        android:paddingBottom="3dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
                 android:layout_marginLeft="20dp"
                 android:text="Tag"
                 android:textColor="#000000"
-                android:textSize="17sp" />
+                android:textSize="13sp" />
 
         </LinearLayout>
 
@@ -46,7 +46,7 @@
             android:layout_marginTop="10dp"
             android:text="success"
             android:textColor="#000000"
-            android:textSize="14sp" />
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/request_log_Time"
@@ -119,28 +119,51 @@
 
     </LinearLayout>
 
-    <TextView
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="10dp"
-        android:background="#328cfb"
-        android:gravity="center"
-        android:paddingBottom="1dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="1dp"
-        android:text="response"
-        android:textColor="#ffffff"
-        android:textSize="15sp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_item_unselected"
+            android:gravity="center"
+            android:paddingBottom="2dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="2dp"
+            android:text="response"
+            android:textColor="#ffffff"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:id="@+id/ic_copy"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/ic_logger_coppy" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/request_log_response"
-        android:layout_margin="10dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:background="#ededed"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
         android:text="no responses"
         android:textColor="#ee000000"
         android:textSize="15sp" />

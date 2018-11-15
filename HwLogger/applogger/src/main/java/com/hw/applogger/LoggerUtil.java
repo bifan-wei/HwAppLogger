@@ -54,8 +54,6 @@ public class LoggerUtil {
             StringBuffer stringBuffer = new StringBuffer();
             short length = 512;
             char[] cs = new char[length];
-            boolean numS = false;
-
             while (true) {
                 int numS1;
                 while ((numS1 = e1.read(cs, 0, length)) != -1) {
